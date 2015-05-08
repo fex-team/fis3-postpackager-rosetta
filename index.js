@@ -62,7 +62,11 @@ rosettaPackager.defaultOptions = {
   processor: {
     '.html': 'html',
     '.tpl': 'smarty'
-  }
+  },
+
+  // 是否将所有零散文件合并成一个文件。
+  // 如果用户配置 pack，  则 用户配置的 pack 优先。
+  allInOne: true
 };
 
 module.exports = rosettaPackager;
