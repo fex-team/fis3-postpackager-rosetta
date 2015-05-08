@@ -1,0 +1,24 @@
+{
+  "name": "fis3-postpackager-rosetta",
+  "version": "1.0.0",
+  "description": "rosetta resouce optimize tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fex-team/fis3-postpackager-rosetta.git"
+  },
+  "keywords": [
+    "fis",
+    "rosetta",
+    "optimizer"
+  ],
+  "author": "fis",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/fex-team/fis3-postpackager-rosetta/issues"
+  },
+  "homepage": "https://github.com/fex-team/fis3-postpackager-rosetta"
+}
