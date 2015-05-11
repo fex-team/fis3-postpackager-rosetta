@@ -1,6 +1,9 @@
-var smarty = require('./lib/lang/smarty.js');
-var html = require('./lib/lang/html.js');
+var lang = {
+  html: require('./lib/lang/html.js'),
+  smarty: require('./lib/lang/smarty.js')
+};
 var createResouce = require('./lib/resource.js');
+var allInOnePack = require('./lib/pack.js');
 
 function rosettaPackager(ret, pack, settings, opt) {
   var files = ret.src;
@@ -22,15 +25,17 @@ function rosettaPackager(ret, pack, settings, opt) {
       resouce.add(id, true);
     });
 
-    switch (settings.processor[file.ext]) {
-      case 'html':
-        html(file, resouce, settings);
-        break;
+    var processor = lang[settings.processor[file.ext]] || lang.html;
 
-      case 'smarty':
-        smarty(file, resouce, settings);
-        break;
+    processor.before && processor.before(file, resouce, settings);
+
+    if (settings.allInOne) {
+      allInOnePack(file, resouce, ret, settings.allInOne === true ? {} : settings.allInOne);
     }
+
+    processor(file, resouce, settings);
+
+    processor.after && processor.after(file, resouce, settings);
   });
 }
 
@@ -66,7 +71,10 @@ rosettaPackager.defaultOptions = {
 
   // 是否将所有零散文件合并成一个文件。
   // 如果用户配置 pack，  则 用户配置的 pack 优先。
-  allInOne: true
+  allInOne: {
+    css: '', // 打包后 css 的文件路径。
+    js: ''  // 打包后 js 的文件路径。
+  }
 };
 
 module.exports = rosettaPackager;
