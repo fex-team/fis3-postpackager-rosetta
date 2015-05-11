@@ -8,6 +8,15 @@ var allInOnePack = require('./lib/pack.js');
 function rosettaPackager(ret, pack, settings, opt) {
   var files = ret.src;
 
+  // 生成映射表，方便快速查找！
+  var idmapping = ret.idmapping = {};
+  var urlmapping = ret.urlmapping = {};
+  Object.keys(files).forEach(function(subpath) {
+    var file = files[subpath];
+    idmapping[file.id] = file;
+    urlmapping[file.getUrl()] = file;
+  });
+
   Object.keys(files).forEach(function(subpath) {
     var file = files[subpath];
 
@@ -15,7 +24,10 @@ function rosettaPackager(ret, pack, settings, opt) {
       return;
     }
 
-    var resouce = createResouce(ret.map);
+    var resouce = createResouce(ret);
+    var processor = lang[settings.processor[file.ext]] || lang.html;
+
+    processor.before && processor.before(file, resouce, settings);
 
     file.requires.forEach(function(id) {
       resouce.add(id);
@@ -24,10 +36,6 @@ function rosettaPackager(ret, pack, settings, opt) {
     file.asyncs.forEach(function(id) {
       resouce.add(id, true);
     });
-
-    var processor = lang[settings.processor[file.ext]] || lang.html;
-
-    processor.before && processor.before(file, resouce, settings);
 
     if (settings.allInOne) {
       allInOnePack(file, resouce, ret, settings.allInOne === true ? {} : settings.allInOne);
@@ -41,10 +49,6 @@ function rosettaPackager(ret, pack, settings, opt) {
 
 // 默认配置信息
 rosettaPackager.defaultOptions = {
-  // 固定的脚本和样式。
-  scripts: null,
-  styles: null,
-
   // 脚本占位符
   scriptPlaceHolder: '<!--SCRIPT_PLACEHOLDER-->',
 
@@ -74,7 +78,13 @@ rosettaPackager.defaultOptions = {
   allInOne: {
     css: '', // 打包后 css 的文件路径。
     js: ''  // 打包后 js 的文件路径。
-  }
+  },
+
+  // 是否捕获页面内的 <script src="xxx"> 资源
+  obtainScript: true,
+
+  // 是否捕获页面内的 <link ref="stylesheet"></link>
+  obtainStyle: true
 };
 
 module.exports = rosettaPackager;
