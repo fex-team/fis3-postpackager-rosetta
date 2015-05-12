@@ -75,16 +75,16 @@ rosettaPackager.defaultOptions = {
 
   // 是否将所有零散文件合并成一个文件。
   // 如果用户配置 pack，  则 用户配置的 pack 优先。
-  allInOne: {
+  allInOne: false/*{
     css: '', // 打包后 css 的文件路径。
     js: ''  // 打包后 js 的文件路径。
-  },
+  }*/,
 
   // 是否捕获页面内的 <script src="xxx"> 资源
-  obtainScript: true,
+  obtainScript: false,
 
   // 是否捕获页面内的 <link ref="stylesheet"></link>
-  obtainStyle: true
+  obtainStyle: false
 };
 
 module.exports = rosettaPackager;
