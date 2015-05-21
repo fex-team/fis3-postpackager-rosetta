@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/fex-team/fis3-postpackager-rosetta/issues"
   },
-  "homepage": "https://github.com/fex-team/fis3-postpackager-rosetta"
+  "homepage": "https://github.com/fex-team/fis3-postpackager-rosetta",
+  "dependencies": {
+    "fis3-postpackager-loader": "^1.0.4"
+  }
 }
