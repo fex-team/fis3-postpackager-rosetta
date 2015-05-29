@@ -1,6 +1,6 @@
 {
   "name": "fis3-postpackager-rosetta",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "rosetta resouce optimize tool",
   "main": "index.js",
   "scripts": {
