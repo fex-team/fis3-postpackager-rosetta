@@ -1,6 +1,6 @@
 {
   "name": "fis3-postpackager-rosetta",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "rosetta resouce optimize tool",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/fex-team/fis3-postpackager-rosetta",
   "dependencies": {
-    "fis3-postpackager-loader": "^1.0.4"
+    "fis3-postpackager-loader": "^1.0.13"
   }
 }
