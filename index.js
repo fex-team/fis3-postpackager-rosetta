@@ -11,5 +11,8 @@ _.assign(rude.defaultOptions, {
   processor: {
     '.html': 'html',
     '.tpl': 'smarty'
-  }
+  },
+
+  // 资源占位符
+  shimPlaceHolder: '<!--ROSETTA_SHIM_PLACEHOLDER-->',
 });
